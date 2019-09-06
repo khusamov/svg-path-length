@@ -2,6 +2,7 @@ import {DOMParser} from 'xmldom';
 import {useNamespaces} from 'xpath';
 import {readFile} from 'fs';
 import {promisify} from 'util';
+import PointAtLength from 'point-at-length';
 
 
 (async function() {
@@ -19,8 +20,13 @@ import {promisify} from 'util';
         xlink: 'http://www.w3.org/1999/xlink'
     });
     const lineNode: Element = svgSelect('//svg:line', test1Svg)[0] as Element;
+    const pathNode: Element = svgSelect('//svg:path', test1Svg)[0] as Element;
 
     // На данный момент сделано чтение аттрибута.
     console.log(lineNode.getAttribute('x1'));
+    console.log(pathNode.getAttribute('d'));
+
+    // Длина элемента path.
+    console.log(PointAtLength(pathNode.getAttribute('d')).length());
 
 })();

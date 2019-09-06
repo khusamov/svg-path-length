@@ -20,9 +20,11 @@
   "devDependencies": {
     "@types/node": "^12.7.4",
     "@types/xmldom": "^0.1.29",
-    "node-ts": "^5.0.2",
     "ts-node": "^8.3.0",
-    "typescript": "^3.6.2",
+    "typescript": "^3.6.2"
+  },
+  "dependencies": {
+    "point-at-length": "^1.1.0",
     "xmldom": "^0.1.27",
     "xpath": "^0.0.27"
   }
