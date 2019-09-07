@@ -3,6 +3,7 @@ import {useNamespaces} from 'xpath';
 import {readFile} from 'fs';
 import {promisify} from 'util';
 import PointAtLength from 'point-at-length';
+import {svgPathProperties} from 'svg-path-properties';
 
 
 (async function() {
@@ -28,5 +29,6 @@ import PointAtLength from 'point-at-length';
 
     // Длина элемента path.
     console.log(PointAtLength(pathNode.getAttribute('d')).length());
+    console.log(svgPathProperties(pathNode.getAttribute('d')).getTotalLength());
 
 })();
