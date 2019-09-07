@@ -26,3 +26,10 @@ https://github.com/ThePedestrian/svg-path-polyfill
 
 Довольно старая библиотека:
 https://www.npmjs.com/package/point-at-length
+
+Найдена библиотека https://www.npmjs.com/package/svgo
+позволяющая сделать следующее:
+- слить все трансформации к одной
+- заменить все примитивы на path
+
+Теоретически этого достаточно, чтобы подсчитать длину всех линий.
