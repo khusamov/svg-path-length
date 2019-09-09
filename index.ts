@@ -11,39 +11,90 @@ const svgSelect = useNamespaces({
     xlink: 'http://www.w3.org/1999/xlink'
 });
 
+type TGetTotalLengthLib = 'svg-path-properties' | 'point-at-length';
+
+function getTotalLength(pathElement, lib: TGetTotalLengthLib = 'svg-path-properties'): number {
+    const path = pathElement.getAttribute('d');
+    switch (lib) {
+        case 'svg-path-properties': return svgPathProperties(path).getTotalLength();
+        case 'point-at-length': return PointAtLength(path).length();
+    }
+}
+
 (async function() {
     const pkg = await import(__dirname + '/package.json');
     console.log(pkg.description);
 
     const test1SvgFile = await promisify(readFile)('test1.svg', 'utf-8');
 
-    console.log(test1SvgFile);
+    // Настройки.
 
-    // Длина элемента path.
-
-    const test1Svg = new DOMParser().parseFromString(test1SvgFile);
-    const lineNode: Element = svgSelect('//svg:line', test1Svg)[0] as Element;
-    const pathNode: Element = svgSelect('//svg:path', test1Svg)[0] as Element;
-    console.log(PointAtLength(pathNode.getAttribute('d')).length());
-    console.log(svgPathProperties(pathNode.getAttribute('d')).getTotalLength());
+    const isCalculateCirclesSeparately = true;
 
     // Сумма длин всех path при помощи Svgo.
 
     const svgo = new Svgo({
-        plugins: [{convertShapeToPath: true}, {mergePaths: false}]
+        plugins: [{convertShapeToPath: {convertArcs: !isCalculateCirclesSeparately}}, {mergePaths: false}]
     });
 
     const test1SvgOptimizedText = (await svgo.optimize(test1SvgFile)).data;
     const test1SvgOptimized = new DOMParser().parseFromString(test1SvgOptimizedText);
-    const pathNodes: Element[] = svgSelect('//svg:path', test1SvgOptimized) as Element[];
 
-    const totalLength = (
-        pathNodes.reduce(
-            (result, pathNode) => result + svgPathProperties(pathNode.getAttribute('d')).getTotalLength(),
+    const result = [];
+
+    // Сумма path-элементов.
+
+    const pathElements: Element[] = svgSelect('//svg:path', test1SvgOptimized) as Element[];
+    const pathTotalLength = (
+        pathElements.reduce(
+            (result, pathElement) => result + getTotalLength(pathElement),
             0
         )
     );
+
+    result.push({
+        comment: 'Pathes',
+        count: pathElements.length,
+        length: pathTotalLength
+    });
+
+    // Сумма окружностей. Вычисляется, если convertArcs: false.
+    // Сделано временно, так как имеются проблемы. Описание проблем см. по ссылкам:
+    // https://github.com/jkroso/parse-svg-path/issues/4
+    // https://github.com/rveciana/svg-path-properties/issues/25
+
+    if (isCalculateCirclesSeparately) {
+        const circleElements: Element[] = svgSelect('//svg:circle', test1SvgOptimized) as Element[];
+        const getCircleLength = circleElement => {
+            const radiusAttributeValue = circleElement.getAttribute('r');
+            if (!radiusAttributeValue) {
+                throw new Error('Радиус окружности отсутствует.');
+            }
+            const radius = Number(radiusAttributeValue);
+            return 2 * Math.PI * radius;
+        };
+        const circleTotalLength = (
+            circleElements.reduce(
+                (result, circleElement) => result + getCircleLength(circleElement),
+                0
+            )
+        );
+        result.push({
+            comment: 'Circles',
+            count: circleElements.length,
+            length: circleTotalLength
+        });
+    }
+
+    // Вывод результатов:
+
+    console.log(test1SvgFile);
     console.log(test1SvgOptimizedText);
-    console.log(pathNodes.length, totalLength);
+    console.log();
+
+    for (const resultItem of result) {
+        console.log(`${resultItem.comment} (${resultItem.count}): ${resultItem.length}`);
+    }
+    console.log('Total:', result.reduce((result, resultItem) => result + resultItem.length, 0));
 
 })();
