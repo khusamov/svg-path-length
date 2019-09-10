@@ -1,6 +1,20 @@
 История изменений
 =================
 
+2019-09-10
+----------
+
+Добавлено вычисление эллипсов.
+Метод взят со страницы:
+https://stackoverflow.com/questions/39866153/calculate-apprx-svg-ellipse-length-calculate-apprx-ellipse-circumference-wit
+
+Обнаружена проблема с дугами. Опять та же проблема. Описание проблемы с дугами добавлены в заявки:
+
+https://github.com/jkroso/parse-svg-path/issues/4  
+https://github.com/rveciana/svg-path-properties/issues/25
+ 
+
+
 2019-09-09
 ----------
 
