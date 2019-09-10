@@ -13,8 +13,12 @@ const svgSelect = useNamespaces({
 
 type TGetTotalLengthLib = 'svg-path-properties' | 'point-at-length';
 
-function getTotalLength(pathElement, lib: TGetTotalLengthLib = 'svg-path-properties'): number {
-    const path = pathElement.getAttribute('d');
+function getTotalLength(pathElementOrPathData: Element | string, lib: TGetTotalLengthLib = 'svg-path-properties'): number {
+    const path = (
+        typeof pathElementOrPathData === 'string'
+            ? pathElementOrPathData
+            : pathElementOrPathData.getAttribute('d')
+    );
     switch (lib) {
         case 'svg-path-properties': return svgPathProperties(path).getTotalLength();
         case 'point-at-length': return PointAtLength(path).length();
@@ -31,7 +35,7 @@ function getTotalLength(pathElement, lib: TGetTotalLengthLib = 'svg-path-propert
 
     const isCalculateCirclesSeparately = true;
 
-    // Сумма длин всех path при помощи Svgo.
+    // Сумма длин всех элементов при помощи пакета svgo.
 
     const svgo = new Svgo({
         plugins: [{convertShapeToPath: {convertArcs: !isCalculateCirclesSeparately}}, {mergePaths: false}]
@@ -83,6 +87,46 @@ function getTotalLength(pathElement, lib: TGetTotalLengthLib = 'svg-path-propert
             comment: 'Circles',
             count: circleElements.length,
             length: circleTotalLength
+        });
+    }
+
+    // Сумма эллипсов. Вычисляется, если convertArcs: false.
+    // Сделано временно, так как имеются проблемы, аналогичные окружностям.
+    if (isCalculateCirclesSeparately) {
+        const ellipseElements: Element[] = svgSelect('//svg:ellipse', test1SvgOptimized) as Element[];
+        const getEllipseLength = ellipseElement => {
+            // Подход к расчету длины эллипса взят со страницы
+            // https://stackoverflow.com/questions/39866153/calculate-apprx-svg-ellipse-length-calculate-apprx-ellipse-circumference-wit
+            const centerXAttributeValue = ellipseElement.getAttribute('cx');
+            const centerYAttributeValue = ellipseElement.getAttribute('cy');
+            const radiusRxAttributeValue = ellipseElement.getAttribute('rx');
+            const radiusRyAttributeValue = ellipseElement.getAttribute('ry');
+            if (!radiusRxAttributeValue || !radiusRyAttributeValue) {
+                throw new Error('Радиус эллипса отсутствует.');
+            }
+            const centerX = Number(centerXAttributeValue);
+            const centerY = Number(centerYAttributeValue);
+            const radiusRx = Number(radiusRxAttributeValue);
+            const radiusRy = Number(radiusRyAttributeValue);
+            return (
+                getTotalLength(`
+                    M ${centerX} ${centerY}
+                    m -${radiusRx}, 0
+                    a ${radiusRx},${radiusRy} 0 1,1 ${radiusRx * 2},0
+                    a ${radiusRx},${radiusRy} 0 1,1 -${radiusRx * 2},0
+                `.split('\n').map(str => str.trim()).filter(str => str).join(' '))
+            );
+        };
+        const ellipseTotalLength = (
+            ellipseElements.reduce(
+                (result, ellipseElement) => result + getEllipseLength(ellipseElement),
+                0
+            )
+        );
+        result.push({
+            comment: 'Ellipses',
+            count: ellipseElements.length,
+            length: ellipseTotalLength
         });
     }
 

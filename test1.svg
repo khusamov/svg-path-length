@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <!-- Creator: CorelDRAW 2017 -->
-<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="210mm" height="297mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-viewBox="0 0 21000 29700"
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="297mm" height="210mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 29700 21000"
  xmlns:xlink="http://www.w3.org/1999/xlink">
  <defs>
   <style type="text/css">
@@ -14,8 +14,11 @@ viewBox="0 0 21000 29700"
  </defs>
  <g id="Слой_x0020_1">
   <metadata id="CorelCorpID_0Corel-Layer"/>
-  <line class="fil0 str0" x1="10517.7" y1="4071.4" x2="10517.7" y2= "24071.4" />
-  <path class="fil0 str0" d="M11968.72 4071.4c-1521.81,6489.71 1769.54,13439.5 0,20000"/>
-  <circle class="fil0 str0" cx="5445.85" cy="6809.31" r="2595.99"/>
+  <line class="fil0 str0" x1="1175.56" y1="456.55" x2="1175.56" y2= "20456.55" />
+  <path class="fil0 str0" d="M2626.58 456.55c-1521.81,6489.71 1769.54,13439.5 0,20000"/>
+  <circle class="fil0 str0" cx="5798.48" cy="3424.19" r="2595.99"/>
+  <ellipse class="fil0 str0" cx="10576.95" cy="5583.68" rx="1401.38" ry="4985.22"/>
+  <ellipse class="fil0 str0" transform="matrix(-0.548364 0.836239 -0.836239 -0.548364 14252.7 3929.59)" rx="1401.38" ry="4985.22"/>
+  <path class="fil0 str0" d="M20087.17 6439.83c-166.45,-418.66 -251.94,-865.09 -251.94,-1315.61 0,-1966.61 1594.26,-3560.87 3560.87,-3560.87"/>
  </g>
 </svg>
