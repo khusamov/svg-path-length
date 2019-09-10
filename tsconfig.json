@@ -3,6 +3,6 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "lib": ["dom"]
+    "lib": ["dom", "es2018"]
   }
 }
