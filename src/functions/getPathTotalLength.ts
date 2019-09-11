@@ -3,6 +3,10 @@ import PointAtLength from 'point-at-length';
 
 type TGetTotalLengthLib = 'svg-path-properties' | 'point-at-length';
 
+function isElement(element: any): element is Element {
+	return 'getAttribute' in element && typeof element.getAttribute === 'function';
+}
+
 /**
  * The SVGPathElement.getTotalLength() method returns the user agent's computed
  * value for the total length of the path in user units.
@@ -12,10 +16,10 @@ type TGetTotalLengthLib = 'svg-path-properties' | 'point-at-length';
  * @param lib
  */
 export default function getPathTotalLength(pathElementOrPathData: Element | string, lib: TGetTotalLengthLib = 'svg-path-properties'): number {
-	const path = (
-		typeof pathElementOrPathData === 'string'
-			? pathElementOrPathData
-			: pathElementOrPathData.getAttribute('d')
+	const path: string = (
+		isElement(pathElementOrPathData)
+			? pathElementOrPathData.getAttribute('d')
+			: pathElementOrPathData
 	);
 	switch (lib) {
 		case 'svg-path-properties': return svgPathProperties(path).getTotalLength();

@@ -1,4 +1,10 @@
 import getPathTotalLength from './getPathTotalLength';
+import {parse as parseSvgTransform} from 'svg-transform-parser2';
+
+interface ITransform {
+	key: string;
+	value: any;
+}
 
 /**
  * Расчет длины эллипса.
@@ -7,13 +13,28 @@ import getPathTotalLength from './getPathTotalLength';
  * @param ellipseElement
  */
 export default function getEllipseLength(ellipseElement) {
-	const centerXAttributeValue = ellipseElement.getAttribute('cx');
-	const centerYAttributeValue = ellipseElement.getAttribute('cy');
 	const radiusRxAttributeValue = ellipseElement.getAttribute('rx');
 	const radiusRyAttributeValue = ellipseElement.getAttribute('ry');
-
 	if (!radiusRxAttributeValue || !radiusRyAttributeValue) {
 		throw new Error('Радиус эллипса отсутствует.');
+	}
+
+	let centerXAttributeValue = ellipseElement.getAttribute('cx');
+	let centerYAttributeValue = ellipseElement.getAttribute('cy');
+	if (!(centerXAttributeValue && centerXAttributeValue)) {
+		const transform = parseSvgTransform(ellipseElement.getAttribute('transform')) as ITransform[];
+		if (!transform.length) {
+			// Для вычисления длины требуется наличие или координат или rotate.
+			throw new Error('Координаты и transform эллипса отсутствуют.');
+		}
+		if (transform.length > 1) {
+			throw new Error('Количество трансформаций эллипса больше одного.');
+		}
+		if (transform[0].key !== 'rotate') {
+			throw new Error(`Недопустимая трасформация ${transform[0].key}.`);
+		}
+		centerXAttributeValue = transform[0].value.cx;
+		centerYAttributeValue = transform[0].value.cy;
 	}
 
 	const centerX = Number(centerXAttributeValue);
@@ -27,7 +48,7 @@ export default function getEllipseLength(ellipseElement) {
 };
 
 /**
- * Конвертирования эллипса в path-данные.
+ * Конвертирование эллипса в path-данные.
  * https://stackoverflow.com/questions/39866153/calculate-apprx-svg-ellipse-length-calculate-apprx-ellipse-circumference-wit
  * @param centerX
  * @param centerY
