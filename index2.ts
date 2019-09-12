@@ -4,6 +4,9 @@ import SvgCalculationReport from './src/SvgCalculationReport';
 import PathLengthPlugin from './src/plugins/PathLengthPlugin';
 import CircleLengthPlugin from './src/plugins/CircleLengthPlugin';
 import EllipseLengthPlugin from './src/plugins/EllipseLengthPlugin';
+import {writeFile} from "fs";
+import {promisify} from 'util';
+import Path from 'path';
 
 (async () => {
 	const pkg = await import(__dirname + '/package.json');
@@ -23,5 +26,8 @@ import EllipseLengthPlugin from './src/plugins/EllipseLengthPlugin';
 		])
 	);
 
-	console.log(new SvgCalculationReport(totalLengthCalculationResult).toString());
+	const report = new SvgCalculationReport(totalLengthCalculationResult).toString();
+	const reportFilename = Path.join(__dirname, 'temp/report.log');
+	promisify(writeFile)(reportFilename, report);
+	console.log('Report save to file:', reportFilename);
 })();
