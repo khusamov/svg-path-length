@@ -1,7 +1,17 @@
 import SvgContainer from '../SvgContainer';
 
+/**
+ * Найденный плагином элемент. Точнее информация об элементе.
+ */
 export interface IPart {
+	/**
+	 * Ссылка на найденный элементов из DOM.
+	 */
 	element: Element;
+
+	/**
+	 * Текстовое SVG-представление элемента.
+	 */
 	html: string;
 
 	/**
@@ -16,9 +26,25 @@ export interface IPart {
 	error?: Error;
 }
 
+/**
+ * Результат вычисления длины элементов плагином.
+ * Плагин должен вычислять длину только одного типа элементов.
+ */
 export interface ILengthCalculationResult {
+	/**
+	 * Имя вычисляемого элемента.
+	 * Например path или ellipse.
+	 */
 	name: string;
+
+	/**
+	 * Длина всех найденных элементов.
+	 */
 	length: number;
+
+	/**
+	 * Массив найденных элементов.
+	 */
 	parts: IPart[];
 
 	/**
