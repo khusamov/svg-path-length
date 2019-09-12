@@ -27,15 +27,18 @@ export default class SvgCalculationReport {
 	}
 
 	private createReport(totalLengthCalculationResult: ITotalLengthCalculationResult) {
+		const withUnit = num => `${num} ${totalLengthCalculationResult.optimizedSvgContainer.unit || ''}`;
 		this
 			.clear().break()
 			.add(totalLengthCalculationResult.sourceSvgContainer.svgText).break()
 			.add(totalLengthCalculationResult.optimizedSvgContainer.svgText).break()
 			.add('Calculation Results:');
 		for (const result of totalLengthCalculationResult.results) {
-			this.add(`${result.name}: ${result.length} ${result.hasErrors ? 'has-errors' : ''}`);
+			if (result.length) {
+				this.add(`${result.name}: ${withUnit(result.length)} ${result.hasErrors ? 'has-errors' : ''}`);
+			}
 		}
-		this.add(`Total: ${totalLengthCalculationResult.totalLength}`).break();
+		this.add(`Total: ${withUnit(totalLengthCalculationResult.totalLength)}`).break();
 		this.createErrorReport(totalLengthCalculationResult);
 	}
 
