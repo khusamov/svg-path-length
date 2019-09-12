@@ -27,7 +27,10 @@ export default class SvgCalculationReport {
 	}
 
 	private createReport(totalLengthCalculationResult: ITotalLengthCalculationResult) {
-		const withUnit = num => `${num} ${totalLengthCalculationResult.optimizedSvgContainer.unit || ''}`;
+		const withUnit = num => {
+			num = totalLengthCalculationResult.optimizedSvgContainer.convertCoord(num);
+			return `${num} ${totalLengthCalculationResult.optimizedSvgContainer.unit || ''}`;
+		};
 		this
 			.clear().break()
 			.add(totalLengthCalculationResult.sourceSvgContainer.svgText).break()

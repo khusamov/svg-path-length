@@ -71,6 +71,10 @@ export default class SvgContainer {
 	 * @param coord
 	 */
 	convertCoord(coord: number): number {
-		return coord;
+		let koeff = 1;
+		if (this.size && this.viewBox) {
+			koeff = this.size.width / this.viewBox.width;
+		}
+		return coord * koeff;
 	}
 }
