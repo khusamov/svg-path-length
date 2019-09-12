@@ -1,11 +1,8 @@
 import {svgPathProperties} from "svg-path-properties";
 import PointAtLength from 'point-at-length';
+import isElement from '../utils/isElement';
 
 type TGetTotalLengthLib = 'svg-path-properties' | 'point-at-length';
-
-function isElement(element: any): element is Element {
-	return 'getAttribute' in element && typeof element.getAttribute === 'function';
-}
 
 /**
  * The SVGPathElement.getTotalLength() method returns the user agent's computed
