@@ -28,6 +28,6 @@ import Path from 'path';
 
 	const report = new SvgCalculationReport(totalLengthCalculationResult).toString();
 	const reportFilename = Path.join(__dirname, 'temp/report.log');
-	promisify(writeFile)(reportFilename, report);
+	await promisify(writeFile)(reportFilename, report);
 	console.log('Report save to file:', reportFilename);
 })();

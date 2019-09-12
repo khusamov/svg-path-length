@@ -47,9 +47,6 @@ export default class SvgLengthCalculator {
 		const optimizedSvgText = (await svgo.optimize(this.svgContainer.svgText)).data;
 		const optimizedSvgContainer = new SvgContainer(optimizedSvgText);
 
-
-		console.log('viewBox', optimizedSvgContainer.unit)
-
 		const results = plugins.map(plugin => plugin.calculate(optimizedSvgContainer));
 		const totalLength = results.reduce((totalLength, result) => totalLength + result.length, 0);
 		const hasErrors = !!results.find(result => result.hasErrors);
