@@ -34,6 +34,14 @@ export default class SvgLengthCalculator {
 				removeStyleElement: true
 			}, {
 				removeScriptElement: true
+			}, {
+				// https://github.com/svg/svgo/blob/master/plugins/convertPathData.js
+				convertPathData: {
+					// Похоже проблема
+					// https://github.com/svg/svgo/issues/1151
+					// решается этой опцией:
+					noSpaceAfterFlags: false
+				}
 			}]
 		});
 		const optimizedSvgText = (await svgo.optimize(this.svgContainer.svgText)).data;
