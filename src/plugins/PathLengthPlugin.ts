@@ -11,7 +11,7 @@ export default class PathLengthPlugin extends AbstractLengthPlugin {
 			svg.select('//svg:path').map(pathElement => {
 				const part: IPart = {
 					element: pathElement,
-					html: serialize(pathElement)
+					markup: serialize(pathElement)
 				};
 				try {
 					part.length = getPathTotalLength(pathElement);

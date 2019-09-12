@@ -53,7 +53,7 @@ export default class SvgCalculationReport {
 					this.add(result.name).break();
 					for (const part of result.parts) {
 						if (part.error) {
-							this.add(part.html);
+							this.add(part.markup);
 							this.add(part.error.message);
 							this.break();
 						}

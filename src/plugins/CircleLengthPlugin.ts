@@ -14,7 +14,7 @@ export default class CircleLengthPlugin extends AbstractLengthPlugin {
 			svg.select('//svg:circle').map(circleElement => {
 				const part: IPart = {
 					element: circleElement,
-					html: serialize(circleElement)
+					markup: serialize(circleElement)
 				};
 				try {
 					part.length = getCircleLength(circleElement);

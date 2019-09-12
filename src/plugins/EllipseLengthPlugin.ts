@@ -12,7 +12,7 @@ export default class EllipseLengthPlugin extends AbstractLengthPlugin {
 			svg.select('//svg:ellipse').map(ellipseElement => {
 				const part: IPart = {
 					element: ellipseElement,
-					html: serialize(ellipseElement)
+					markup: serialize(ellipseElement)
 				};
 				try {
 					part.length = getEllipseLength(ellipseElement);

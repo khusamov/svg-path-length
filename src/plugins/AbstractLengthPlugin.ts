@@ -12,7 +12,7 @@ export interface IPart {
 	/**
 	 * Текстовое SVG-представление элемента.
 	 */
-	html: string;
+	markup: string;
 
 	/**
 	 * Длина линии элемента (периметр).
