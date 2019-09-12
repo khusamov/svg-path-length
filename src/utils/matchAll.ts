@@ -4,7 +4,7 @@
  * @param regexp
  */
 export default function matchAll(str: string, regexp: RegExp) {
-	const result = [];
+	const result: RegExpExecArray[] = [];
 	let m;
 	while ((m = regexp.exec(str)) !== null) {
 		// Это необходимо, чтобы избежать бесконечных циклов с совпадениями нулевой ширины.

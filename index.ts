@@ -17,7 +17,7 @@ function getTotalLength(pathElementOrPathData: Element | string, lib: TGetTotalL
     const path = (
         typeof pathElementOrPathData === 'string'
             ? pathElementOrPathData
-            : pathElementOrPathData.getAttribute('d')
+            : pathElementOrPathData.getAttribute('d') || ''
     );
     switch (lib) {
         case 'svg-path-properties': return svgPathProperties(path).getTotalLength();
@@ -44,7 +44,11 @@ function getTotalLength(pathElementOrPathData: Element | string, lib: TGetTotalL
     const test1SvgOptimizedText = (await svgo.optimize(test1SvgFile)).data;
     const test1SvgOptimized = new DOMParser().parseFromString(test1SvgOptimizedText);
 
-    const result = [];
+    const result: Array<{
+        comment: string;
+        count: number;
+        length: number;
+    }> = [];
 
     // Сумма path-элементов.
 

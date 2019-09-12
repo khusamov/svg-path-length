@@ -15,7 +15,7 @@ type TGetTotalLengthLib = 'svg-path-properties' | 'point-at-length';
 export default function getPathTotalLength(pathElementOrPathData: Element | string, lib: TGetTotalLengthLib = 'svg-path-properties'): number {
 	const path: string = (
 		isElement(pathElementOrPathData)
-			? pathElementOrPathData.getAttribute('d')
+			? pathElementOrPathData.getAttribute('d') || ''
 			: pathElementOrPathData
 	);
 	switch (lib) {
