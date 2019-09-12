@@ -6,6 +6,7 @@ export interface ITotalLengthCalculationResult {
 	results: ILengthCalculationResult[];
 	totalLength: number;
 	hasErrors: boolean;
+	sourceSvgContainer: SvgContainer;
 	optimizedSvgContainer: SvgContainer;
 }
 
@@ -44,6 +45,6 @@ export default class SvgLengthCalculator {
 		const results = plugins.map(plugin => plugin.calculate(optimizedSvgContainer));
 		const totalLength = results.reduce((totalLength, result) => totalLength + result.length, 0);
 		const hasErrors = !!results.find(result => result.hasErrors);
-		return {results, hasErrors, totalLength, optimizedSvgContainer};
+		return {results, hasErrors, totalLength, sourceSvgContainer: this.svgContainer, optimizedSvgContainer};
 	}
 }

@@ -28,10 +28,9 @@ export default class SvgCalculationReport {
 
 	private createReport(totalLengthCalculationResult: ITotalLengthCalculationResult) {
 		this
-			.clear()
-			.break()
-			.add(totalLengthCalculationResult.optimizedSvgContainer.svgText)
-			.break()
+			.clear().break()
+			.add(totalLengthCalculationResult.sourceSvgContainer.svgText).break()
+			.add(totalLengthCalculationResult.optimizedSvgContainer.svgText).break()
 			.add('Calculation Results:');
 		for (const result of totalLengthCalculationResult.results) {
 			this.add(`${result.name}: ${result.length} ${result.hasErrors ? 'has-errors' : ''}`);
