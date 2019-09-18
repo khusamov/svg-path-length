@@ -2,6 +2,20 @@ import SvgContainer from './SvgContainer';
 import AbstractLengthPlugin, {ILengthCalculationResult} from './plugins/AbstractLengthPlugin';
 import Svgo from 'svgo';
 
+/**
+ * Параметры калькулятора.
+ */
+interface ICalculationLengthOptions {
+	/**
+	 * Если флаг поднят, то окружности, эллипсы и дуги не будут конвертироваться в пути (path)
+	 * и их длины будут вычисляться отдельно.
+	 */
+	isCalculateCirclesSeparately?: boolean;
+}
+
+/**
+ * Результат работы калькулятора.
+ */
 export interface ITotalLengthCalculationResult {
 	results: ILengthCalculationResult[];
 	totalLength: number;
@@ -10,16 +24,11 @@ export interface ITotalLengthCalculationResult {
 	optimizedSvgContainer: SvgContainer;
 }
 
-interface ICalculationLengthOptions {
-	/**
-	 * Если флаг поднят, то окружности, эллипсы и дуги не будут конвертироваться в пути (path)
-	 * и их длины будут вычисляться отдельно.
-	 */
-	isCalculateCirclesSeparately: boolean;
-}
-
+/**
+ * Калькулятор расчета длины линий в SVG-файле.
+ */
 export default class SvgLengthCalculator {
-	constructor(private svgContainer: SvgContainer, private options: ICalculationLengthOptions) {}
+	constructor(private svgContainer: SvgContainer, private options: ICalculationLengthOptions = {}) {}
 
 	async calculate(plugins: AbstractLengthPlugin[]): Promise<ITotalLengthCalculationResult> {
 
