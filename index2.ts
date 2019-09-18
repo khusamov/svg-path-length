@@ -4,7 +4,7 @@ import SvgCalculationReport from './src/SvgCalculationReport';
 import PathLengthPlugin from './src/plugins/PathLengthPlugin';
 import CircleLengthPlugin from './src/plugins/CircleLengthPlugin';
 import EllipseLengthPlugin from './src/plugins/EllipseLengthPlugin';
-import {writeFile} from "fs";
+import {writeFile} from 'fs';
 import {promisify} from 'util';
 import Path from 'path';
 
