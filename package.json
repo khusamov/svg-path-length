@@ -4,8 +4,7 @@
   "description": "Утилита для вычисления длин всех линий в SVG-файле",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node index",
-    "start2": "ts-node index2",
+    "start": "ts-node src/index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

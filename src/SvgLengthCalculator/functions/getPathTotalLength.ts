@@ -1,6 +1,6 @@
 import {svgPathProperties} from "svg-path-properties";
 import PointAtLength from 'point-at-length';
-import isElement from '../utils/isElement';
+import isElement from '../../utils/isElement';
 
 type TGetTotalLengthLib = 'svg-path-properties' | 'point-at-length';
 

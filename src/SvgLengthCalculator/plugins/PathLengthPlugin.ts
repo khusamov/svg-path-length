@@ -1,5 +1,5 @@
 import AbstractLengthPlugin, {ILengthCalculationResult, IPart} from './AbstractLengthPlugin';
-import SvgContainer from '../SvgContainer';
+import SvgContainer from '../../SvgContainer';
 import getPathTotalLength from '../functions/getPathTotalLength';
 
 /**

@@ -1,4 +1,4 @@
-import SvgContainer from '../SvgContainer';
+import SvgContainer from '../../SvgContainer';
 
 /**
  * Найденный плагином элемент. Точнее информация об элементе.
