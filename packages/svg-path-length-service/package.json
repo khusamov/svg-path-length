@@ -2,9 +2,14 @@
   "name": "svg-path-length-service",
   "version": "1.0.0",
   "description": "Микросервис для расчета длины линий SVG-файла",
-  "license": "ISC",
   "author": "Khusamov Sukhrob <khusamov@yandex.ru>",
+  "license": "ISC",
   "homepage": "https://github.com/khusamov/svg-path-length#readme",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/khusamov/svg-path-length.git"
@@ -12,12 +17,9 @@
   "bugs": {
     "url": "https://github.com/khusamov/svg-path-length/issues"
   },
-  "main": "dist/index.js",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "start": "ts-node src/index.ts",
+    "tsc": "tsc",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
