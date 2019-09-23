@@ -1,0 +1,36 @@
+{
+  "name": "svg-path-length-library",
+  "version": "1.0.0",
+  "description": "Утилита для вычисления длин всех линий в SVG-файле",
+  "author": "Khusamov Sukhrob <khusamov@yandex.ru>",
+  "license": "ISC",
+  "homepage": "https://github.com/khusamov/svg-path-length#readme",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khusamov/svg-path-length.git"
+  },
+  "bugs": {
+    "url": "https://github.com/khusamov/svg-path-length/issues"
+  },
+  "scripts": {
+    "start": "ts-node src/index"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.4",
+    "@types/prettier": "^1.18.2",
+    "@types/svgo": "^1.2.1",
+    "@types/xmldom": "^0.1.29",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.6.2"
+  },
+  "dependencies": {
+    "point-at-length": "^1.1.0",
+    "prettier": "^1.18.2",
+    "svg-path-properties": "^0.5.2",
+    "svg-transform-parser2": "^1.0.0",
+    "svgo": "^1.3.0",
+    "xmldom": "^0.1.27",
+    "xpath": "^0.0.27"
+  }
+}
