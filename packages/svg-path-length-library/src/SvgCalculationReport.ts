@@ -13,7 +13,7 @@ export default class SvgCalculationReport {
 	/**
 	 * Отчет в расширенном виде в формате JSON.
 	 */
-	toJson() {
+	toJson(): any {
 		interface IAnyObject {[key: string]: any;}
 		const report: IAnyObject = {};
 		report.results = this.totalLengthCalculationResult.results;
@@ -39,6 +39,7 @@ export default class SvgCalculationReport {
 				return errors;
 			}, [])
 		);
+		return report;
 	}
 
 	private clear(): this {
