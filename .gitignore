@@ -2,3 +2,5 @@
 node_modules
 temp
 yarn-error.log
+dist
+lerna-debug.log
