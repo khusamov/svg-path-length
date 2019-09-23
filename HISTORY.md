@@ -11,9 +11,17 @@
 2019-09-12
 ----------
 
-Ошибка оказывается в библиотеке svgo. Неправильная конвертация для команды `a`.
+Опция noSpaceAfterFlags выставлена в false. Таким образом была решена 
+проблема 'malformed path data', которая возникала, если в документе присутствовали дуги.
 
-https://github.com/svg/svgo/issues/1151
+Оказывается есть опция noSpaceAfterFlags у плагина [convertPathData](convertPathData).
+Ее следовало выставить в false, чтобы появились пробелы после флагов команд. Это особенность синтаксиса
+элемента svg:path. Библиотеки svg-path-properties и point-at-length, которые реализуют метод getTotalLength, 
+не понимают такой синтаксис. 
+
+Подробности см. https://github.com/svg/svgo/issues/1137#issuecomment-517738958
+
+[convertPathData]: https://github.com/svg/svgo/blob/master/plugins/convertPathData.js
 
 2019-09-10
 ----------
@@ -26,8 +34,6 @@ https://stackoverflow.com/questions/39866153/calculate-apprx-svg-ellipse-length-
 
 https://github.com/jkroso/parse-svg-path/issues/4  
 https://github.com/rveciana/svg-path-properties/issues/25
- 
-
 
 2019-09-09
 ----------
