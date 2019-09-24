@@ -8,6 +8,7 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
+    "bin",
     "dist"
   ],
   "bin": "bin/svg-path-length-service",
