@@ -1,6 +1,6 @@
 {
   "name": "svg-path-length-service",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Микросервис для расчета длины линий SVG-файла",
   "author": "Khusamov Sukhrob <khusamov@yandex.ru>",
   "license": "ISC",
