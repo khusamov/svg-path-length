@@ -2174,13 +2174,6 @@
   dependencies:
     "@types/koa" "*"
 
-"@types/koa-cors@^0.0.0":
-  version "0.0.0"
-  resolved "https://registry.npmjs.org/@types/koa-cors/-/koa-cors-0.0.0.tgz#7a0ef45acfed1ef6c046d5896e3974261d8a9d37"
-  integrity sha512-bqWPbf/MNHx5rwOdQXEkQxL7/DvD1sMQRC+PUDqnYf/i4WPUeLhePRssexznT9uQSNWhtfFi1lDanoY/srFb5g==
-  dependencies:
-    "@types/koa" "*"
-
 "@types/koa-logger@^3.1.1":
   version "3.1.1"
   resolved "https://registry.npmjs.org/@types/koa-logger/-/koa-logger-3.1.1.tgz#bf759ba2f25b7562ffa30b09616bb1c1e5070fea"
