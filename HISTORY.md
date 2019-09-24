@@ -1,6 +1,13 @@
 История изменений
 =================
 
+2019-09-24
+----------
+
+Исправлена ошибка 'Converting circular structure to JSON'.
+
+Создан пакет `packages/svg-path-length-client` с первой версией клиента на ReactJS.
+
 2019-09-23
 ----------
 

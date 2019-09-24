@@ -3,6 +3,7 @@ import Router from 'koa-router';
 import readPackageJson from 'read-pkg';
 import koaBody from 'koa-body';
 import logger from 'koa-logger';
+import cors from 'koa-cors';
 import {promisify} from 'util';
 import {readFile} from 'fs';
 import {join} from "path";
@@ -37,6 +38,7 @@ import {PathLengthPlugin, CircleLengthPlugin, EllipseLengthPlugin} from 'svg-pat
 		}
 	});
 
+	app.use(cors());
 	app.use(logger());
 
 	const router = createRouter(packageJson);
