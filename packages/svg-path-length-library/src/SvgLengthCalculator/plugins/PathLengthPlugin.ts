@@ -10,7 +10,6 @@ export default class PathLengthPlugin extends AbstractLengthPlugin {
 		const parts: IPart[] = (
 			svg.select('//svg:path').map(pathElement => {
 				const part: IPart = {
-					element: pathElement,
 					markup: serialize(pathElement)
 				};
 				try {

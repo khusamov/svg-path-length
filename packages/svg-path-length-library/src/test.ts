@@ -20,7 +20,7 @@ import {join} from 'path';
 		})
 	);
 	const totalLengthCalculationResult = (
-		await svgLengthCalculator.calculate([
+		await svgLengthCalculator.calculateLength([
 			new PathLengthPlugin,
 			new CircleLengthPlugin,
 			new EllipseLengthPlugin

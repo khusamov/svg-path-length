@@ -5,11 +5,6 @@ import SvgContainer from '../../SvgContainer';
  */
 export interface IPart {
 	/**
-	 * Ссылка на найденный элементов из DOM.
-	 */
-	element: Element;
-
-	/**
 	 * Текстовое SVG-представление элемента.
 	 */
 	markup: string;

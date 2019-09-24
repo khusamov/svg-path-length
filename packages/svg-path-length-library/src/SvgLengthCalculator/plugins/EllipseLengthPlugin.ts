@@ -11,7 +11,6 @@ export default class EllipseLengthPlugin extends AbstractLengthPlugin {
 		const parts: IPart[] = (
 			svg.select('//svg:ellipse').map(ellipseElement => {
 				const part: IPart = {
-					element: ellipseElement,
 					markup: serialize(ellipseElement)
 				};
 				try {

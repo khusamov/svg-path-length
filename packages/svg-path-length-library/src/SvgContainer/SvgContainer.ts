@@ -6,6 +6,7 @@ import Prettier, {Options} from 'prettier';
 import ViewBox, {IViewBox} from './ViewBox';
 import SvgUnit from './SvgUnit';
 import SvgSize, {ISvgSize} from './SvgSize';
+import ISvgContainer from './ISvgContainer';
 
 const prettierOptions: Options = {
 	useTabs: true,
@@ -21,9 +22,13 @@ const svgSelect = useNamespaces({
 
 /**
  * Контейнер для SVG-данных.
- * К контейнеру можно подключить плагины, которые делают расчет длин элементов.
+ * Хранит данные и предоставляет к ним доступ.
  */
 export default class SvgContainer {
+	/**
+	 * Создать контейнер из файла.
+	 * @param filePath
+	 */
 	static async createFromFile(filePath: string) {
 		const fileContentText: string = await promisify(readFile)(filePath, 'utf-8');
 		return new SvgContainer(fileContentText);
@@ -76,5 +81,14 @@ export default class SvgContainer {
 			koeff = this.size.width / this.viewBox.width;
 		}
 		return coord * koeff;
+	}
+
+	toJson(): ISvgContainer {
+		return {
+			size: this.size,
+			svgText: this.svgText,
+			unit: this.unit,
+			viewBox: this.viewBox
+		};
 	}
 }

@@ -72,12 +72,7 @@ function createRouter(packageJson) {
 			const result = await calculate(svgFilePath);
 			ctx.body = {
 				success: true,
-				result: {
-					length: result.result.totalLength,
-					unit: '',
-					result: result.result,
-					report: result.report.toJson()
-				}
+				result
 			};
 		} else {
 			ctx.body = {
@@ -97,15 +92,11 @@ async function calculate(filepath) {
 			isCalculateCirclesSeparately: true
 		})
 	);
-	const totalLengthCalculationResult = (
-		await svgLengthCalculator.calculate([
+	return (
+		await svgLengthCalculator.calculateLength([
 			new PathLengthPlugin,
 			new CircleLengthPlugin,
 			new EllipseLengthPlugin
 		])
 	);
-	return {
-		result: totalLengthCalculationResult,
-		report: new SvgCalculationReport(totalLengthCalculationResult)
-	};
 }

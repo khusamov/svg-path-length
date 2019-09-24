@@ -17,9 +17,9 @@ export default class SvgCalculationReport {
 		interface IAnyObject {[key: string]: any;}
 		const report: IAnyObject = {};
 		report.results = this.totalLengthCalculationResult.results;
-		report.total = this.withUnit(this.totalLengthCalculationResult.totalLength);
-		report.sourceSvg = this.totalLengthCalculationResult.sourceSvgContainer.svgText;
-		report.optimizedSvg = this.totalLengthCalculationResult.optimizedSvgContainer.svgText;
+		report.total = this.withUnit(this.totalLengthCalculationResult.totalLength.value);
+		report.sourceSvg = this.totalLengthCalculationResult.sourceSvg.svgText;
+		report.optimizedSvg = this.totalLengthCalculationResult.optimizedSvg.svgText;
 		report.errors = (
 			this.totalLengthCalculationResult.results.reduce((errors: IAnyObject[], result) => {
 				if (result.hasErrors) {
@@ -58,23 +58,23 @@ export default class SvgCalculationReport {
 	}
 
 	private withUnit(num: number): string {
-		num = this.totalLengthCalculationResult.optimizedSvgContainer.convertCoord(num);
+		// num = this.totalLengthCalculationResult.optimizedSvg.convertCoord(num);
 		num = Math.round(num);
-		return `${num} ${this.totalLengthCalculationResult.optimizedSvgContainer.unit || ''}`;
+		return `${num} ${this.totalLengthCalculationResult.optimizedSvg.unit || ''}`;
 	}
 
 	private createReport(totalLengthCalculationResult: ITotalLengthCalculationResult) {
 		this
 			.clear().break()
-			.add(totalLengthCalculationResult.sourceSvgContainer.svgText).break()
-			.add(totalLengthCalculationResult.optimizedSvgContainer.svgText).break()
+			.add(totalLengthCalculationResult.sourceSvg.svgText).break()
+			.add(totalLengthCalculationResult.optimizedSvg.svgText).break()
 			.add('Calculation Results:');
 		for (const result of totalLengthCalculationResult.results) {
 			if (result.length) {
 				this.add(`${result.name}: ${this.withUnit(result.length)} ${result.hasErrors ? 'has-errors' : ''}`);
 			}
 		}
-		this.add(`Total: ${this.withUnit(totalLengthCalculationResult.totalLength)}`).break();
+		this.add(`Total: ${this.withUnit(totalLengthCalculationResult.totalLength.value)}`).break();
 		this.createErrorReport(totalLengthCalculationResult);
 	}
 

@@ -1,4 +1,4 @@
-import SvgContainer from '../../SvgContainer';
+import SvgContainer, {ISvgContainer} from '../../SvgContainer';
 import {ILengthCalculationResult} from '../plugins/AbstractLengthPlugin';
 
 /**
@@ -6,8 +6,13 @@ import {ILengthCalculationResult} from '../plugins/AbstractLengthPlugin';
  */
 export default interface ITotalLengthCalculationResult {
 	results: ILengthCalculationResult[];
-	totalLength: number;
+	totalLength: ILength;
 	hasErrors: boolean;
-	sourceSvgContainer: SvgContainer;
-	optimizedSvgContainer: SvgContainer;
+	sourceSvg: ISvgContainer;
+	optimizedSvg: ISvgContainer;
+}
+
+export interface ILength {
+	value: number;
+	unit: string | undefined;
 }

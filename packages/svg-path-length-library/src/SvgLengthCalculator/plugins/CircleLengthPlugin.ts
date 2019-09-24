@@ -13,7 +13,6 @@ export default class CircleLengthPlugin extends AbstractLengthPlugin {
 		const parts: IPart[] = (
 			svg.select('//svg:circle').map(circleElement => {
 				const part: IPart = {
-					element: circleElement,
 					markup: serialize(circleElement)
 				};
 				try {
