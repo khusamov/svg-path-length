@@ -10,6 +10,7 @@
   "files": [
     "dist"
   ],
+  "bin": "bin/svg-path-length-service",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/khusamov/svg-path-length.git"
@@ -18,14 +19,15 @@
     "url": "https://github.com/khusamov/svg-path-length/issues"
   },
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "start": "tsc && node bin/svg-path-length-service.js",
     "tsc": "tsc",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "prepublish": "tsc"
   },
   "dependencies": {
+    "@koa/cors": "^3.0.0",
     "koa": "^2.8.1",
     "koa-body": "^4.1.1",
-    "koa-cors": "^0.0.16",
     "koa-logger": "^3.2.1",
     "koa-router": "^7.4.0",
     "read-pkg": "^5.2.0",
@@ -33,9 +35,9 @@
   },
   "devDependencies": {
     "@types/koa": "^2.0.49",
-    "@types/koa-cors": "^0.0.0",
     "@types/koa-logger": "^3.1.1",
     "@types/koa-router": "^7.0.42",
+    "@types/koa__cors": "^2.2.3",
     "@types/node": "^12.7.5",
     "@types/read-pkg": "^5.1.0",
     "typescript": "^3.6.3"

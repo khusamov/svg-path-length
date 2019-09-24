@@ -1,11 +1,18 @@
 # `svg-path-length-service`
 
-> TODO: description
+Микросервис для расчета длины линий в SVG-файлах.
 
 ## Usage
 
-```
-const svgPathLengthService = require('svg-path-length-service');
+Для запуска сайта при помощи `pm2` следует создать файл `ecosystem.config.js` 
+со следующим содержимым:
 
-// TODO: DEMONSTRATE API
+```javascript
+module.exports = {
+  apps : [{
+    name: "svg-path-length-service",
+    script: "/usr/bin/npx",
+    args: "--package svg-path-length-service"
+  }]
+}
 ```
