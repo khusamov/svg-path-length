@@ -31,7 +31,6 @@
     "koa-body": "^4.1.1",
     "koa-logger": "^3.2.1",
     "koa-router": "^7.4.0",
-    "read-pkg": "^5.2.0",
     "svg-path-length-library": "^1.0.2"
   },
   "devDependencies": {
