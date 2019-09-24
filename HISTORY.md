@@ -8,6 +8,10 @@
 
 Создан пакет `packages/svg-path-length-client` с первой версией клиента на ReactJS.
 
+Опубликованы на NPM пакеты  
+https://www.npmjs.com/package/svg-path-length-service  
+https://www.npmjs.com/package/svg-path-length-library  
+
 2019-09-23
 ----------
 
