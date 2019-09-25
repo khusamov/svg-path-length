@@ -1,8 +1,11 @@
 TODO
 ====
 
-Сделать развертывание для пакета packages/svg-path-length-client:
-    Сборка и копирование файлов по SSH в определенную папку.
+Разобраться ошибкой 'error TS1192: Module '"path"' has no default export' 
+с allowSyntheticDefaultImports и esModuleInterop для файла deploy/index.ts
+Импорт без * as не пашет.
+
+Сделать вывод версии клиента и сервера на svg-path-length-client.
 
 Сделать развертывание для пакета packages/svg-path-length-service:
     Сборка, публикация и запуск команды npx на удаленном сервере по SSH.
