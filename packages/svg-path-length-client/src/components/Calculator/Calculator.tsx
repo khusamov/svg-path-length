@@ -37,25 +37,31 @@ export default class Calculator extends Component<{}, ICalculatorState> {
 		const {selectedFiles, requests, status} = this.state;
 		return (
 			<div className='Calculator'>
-				<div>
-					<input
-						type='file'
-						multiple={true}
-						accept='image/svg+xml'
-						disabled={status === 'request'}
-						onChange={this.onInputFileChange}
-					/>
+				<h1>Калькулятор расчета длины линий SVG-файла</h1>
+				<div style={{marginBottom: 20}}>
+					<div>
+						<input
+							type='file'
+							multiple={true}
+							accept='image/svg+xml'
+							disabled={status === 'request'}
+							onChange={this.onInputFileChange}
+						/>
+					</div>
+					{selectedFiles && selectedFiles.length && (
+						<div>Выбраны файлы: {selectedFiles.map(selectedFile => selectedFile.name).join(', ')}</div>
+					)}
+					<div>
+						{
+							{
+								idle: <span style={{color: 'blue'}}>Выберите SVG-файлы для расчета.</span>,
+								request: <span style={{color: 'green'}}>Файлы отправлены на сервер. Ждите ответ...</span>,
+								failure: <span style={{color: 'red'}}>Внимание, что-то пошло не так! См. консоль браузера.</span>,
+							}[status]
+						}
+					</div>
 				</div>
-				{selectedFiles && selectedFiles.length && (
-					<div>Выбраны файлы: {selectedFiles.map(selectedFile => selectedFile.name).join(', ')}</div>
-				)}
-				{
-					{
-						idle: 'Выберите SVG-файлы для расчета.',
-						request: 'Файлы отправлены на сервер. Ждите ответ...',
-						failure: 'Внимание, что-то пошло не так! См. консоль браузера.',
-					}[status]
-				}
+
 				{requests && (
 					<div>
 						<table>
@@ -87,6 +93,25 @@ export default class Calculator extends Component<{}, ICalculatorState> {
 						</table>
 					</div>
 				)}
+				<code>
+					<pre
+						dangerouslySetInnerHTML={
+							{
+								__html: `
+									Опции при экспорте CDR -> SVG
+									-----------------------------
+				
+									SVG 1.1
+									UTF-8
+									Document Setup: millimeters
+									Drawing Precision: 1:100 units
+									[+] Keep pixel measurements
+									Export Text: As Curves
+								`.split('\n').map(s => s.trim()).join('\n')
+							}
+						}
+					/>
+				</code>
 			</div>
 		);
 	}

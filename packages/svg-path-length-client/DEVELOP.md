@@ -11,6 +11,7 @@
 ```ini
 REACT_APP_HOST = localhost
 REACT_APP_PORT = 3000
+PORT = 3001
 ```
 
 Сборка
