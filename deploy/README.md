@@ -22,6 +22,25 @@
 сочетает в себе оба клиента SSH (позволяет запускать команды на удаленном сервере
 например `npx <пакет>`) и SFTP (позволяет отправлять и принимать файлы).
 
+#### Также было найдено:
+
+[Dokku](dokku) - утилита для создания своего docker-сервера (аналог Heroku). 
+Но не годится из-за привязки к git push.
+
+Ссылки по Dokku:    
+http://dokku.viewdocs.io/dokku/deployment/application-deployment/  
+https://habr.com/ru/company/likeastore/blog/211016/  
+https://habr.com/ru/post/225513/  
+
+[Shipit](shipit) - аналог Capistrano. Но там проблема с директориями 
+и невозможностью запустить `npx`.
+
+[Flightplan](flightplan) - утилита для развертывания, но больше напоминает SSH-клиент. 
+Надо позже подробнее рассмотреть.
+
+[PM2 deployment](pm2deployment) - PM2 тоже может заниматься развертыванием, но ограничен по функционалу.
+
+
 Настройка развертывания
 -----------------------
 
@@ -41,3 +60,8 @@ module.exports = {
 
 [ssh2-sftp-client]: https://www.npmjs.com/package/ssh2-sftp-client
 [ssh2-promise]: https://www.npmjs.com/package/ssh2-promise
+
+[flightplan]: https://github.com/pstadler/flightplan
+[dokku]: https://github.com/dokku/dokku
+[shipit]: https://github.com/shipitjs/shipit
+[pm2deployment]: http://pm2.keymetrics.io/docs/usage/deployment/
