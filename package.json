@@ -4,7 +4,13 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "deploy": "npm run build:client && ts-node deploy",
+    "build:client": "lerna run build --scope=svg-path-length-client"
+  },
   "devDependencies": {
-    "lerna": "^3.13.1"
+    "lerna": "^3.13.1",
+    "node-ssh": "^6.0.0",
+    "ts-node": "^8.4.1"
   }
 }
