@@ -44,14 +44,21 @@ https://habr.com/ru/post/225513/
 Настройка развертывания
 -----------------------
 
-Для работы скрипта следует создать файл `deploy.config.js` с таким 
+Для работы скрипта следует создать файл `deploy.config.ts` с таким 
 содержимым (опции берутся из [node-ssh](node-ssh) `ssh.connect({...options})`):
 
-```javascript
-module.exports = {
+```typescript
+export const sshConfig = {
 	host: '',
-	username: '',
+	username: 'root',
 	password: ''
+};
+
+export const deployConfig = {
+	'svg-path-length-client': {
+		localDir: 'packages/svg-path-length-client/build',
+		remoteDir: '/var/www/khusamov/data/www/svg-path-length.khusamov.ru'
+	}
 };
 ```
 

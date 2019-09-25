@@ -1,26 +1,23 @@
 import * as NodeSsh from 'node-ssh';
-import config from './deploy.config.js';
+import * as Path from 'path';
+import {sshConfig, deployConfig} from './deploy.config';
 
+const clientDeployConfig = deployConfig['svg-path-length-client'];
 const ssh = new NodeSsh;
 
 (async () => {
-
 	try {
-
-		await ssh.connect(config);
+		await ssh.connect(sshConfig);
 
 		const result = (
 			await ssh.execCommand('rm -fr *', {
-				cwd: '/var/www/khusamov/data/www/svg-path-length.khusamov.ru'
+				cwd: clientDeployConfig.remoteDir
 			})
 		);
 
-		// console.log(result.stdout);
-		// console.log(result.stderr);
-
 		const status = await ssh.putDirectory(
-			'D:\\REPO\\github\\svg-path-length\\packages\\svg-path-length-client\\build',
-			'/var/www/khusamov/data/www/svg-path-length.khusamov.ru',
+			Path.join(__dirname, '..', clientDeployConfig.localDir),
+			clientDeployConfig.remoteDir,
 			{
 				recursive: true,
 				// Если concurrency > 1, то начинаются проблемы с выгрузкой файлов.
@@ -33,17 +30,9 @@ const ssh = new NodeSsh;
 				}
 			}
 		);
-
-		console.log('status', status)
-
-
 	} catch (error) {
 		console.log('error.code=', error.code);
 		console.log(error);
 	}
-
-
-
-
 	process.exit(0);
 })();
