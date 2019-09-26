@@ -5,7 +5,8 @@
     "packages/*"
   ],
   "scripts": {
-    "deploy": "npm run build:client && ts-node deploy",
+    "deploy-and-build": "npm run build:client && npm run deploy",
+    "deploy": "ts-node --project deploy/tsconfig.json deploy",
     "build:client": "lerna run build --scope=svg-path-length-client"
   },
   "devDependencies": {

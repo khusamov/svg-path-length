@@ -1,5 +1,5 @@
-import * as NodeSsh from 'node-ssh';
-import * as Path from 'path';
+import NodeSsh from 'node-ssh';
+import {join} from 'path';
 import {sshConfig, deployConfig} from './deploy.config';
 
 const clientDeployConfig = deployConfig['svg-path-length-client'];
@@ -16,7 +16,7 @@ const ssh = new NodeSsh;
 		);
 
 		const status = await ssh.putDirectory(
-			Path.join(__dirname, '..', clientDeployConfig.localDir),
+			join(__dirname, '..', clientDeployConfig.localDir),
 			clientDeployConfig.remoteDir,
 			{
 				recursive: true,

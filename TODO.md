@@ -1,10 +1,6 @@
 TODO
 ====
 
-Разобраться ошибкой 'error TS1192: Module '"path"' has no default export' 
-с allowSyntheticDefaultImports и esModuleInterop для файла deploy/index.ts
-Импорт без * as не пашет.
-
 Сделать вывод версии клиента и сервера на svg-path-length-client.
 
 Сделать развертывание для пакета packages/svg-path-length-service:
