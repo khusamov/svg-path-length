@@ -1,7 +1,7 @@
 TODO
 ====
 
-Сделать вывод версии клиента и сервера на svg-path-length-client.
+Сделать вывод версии сервера на svg-path-length-client.
 
 Сделать развертывание для пакета packages/svg-path-length-service:
     Сборка, публикация и запуск команды npx на удаленном сервере по SSH.

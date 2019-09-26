@@ -37,7 +37,7 @@ export default class Calculator extends Component<{}, ICalculatorState> {
 		const {selectedFiles, requests, status} = this.state;
 		return (
 			<div className='Calculator'>
-				<h1>Калькулятор расчета длины линий SVG-файла</h1>
+				<div>Калькулятор расчета длины линий SVG-файла</div>
 				<div style={{marginBottom: 20}}>
 					<div>
 						<input

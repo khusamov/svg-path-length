@@ -1,6 +1,7 @@
 {
   "name": "svg-path-length-client",
   "version": "1.0.2",
+  "description": "Клиентская часть калькулятора для расчета длины линий SVG-файла",
   "private": true,
   "dependencies": {
     "@types/jest": "24.0.18",
