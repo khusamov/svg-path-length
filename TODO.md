@@ -1,6 +1,48 @@
 TODO
 ====
 
+Сделать для сервера возможность конфигурировать.
+Конфиг можно распарсить при помощи `eval(typescript.transpile())`.
+https://github.com/microsoft/TypeScript/wiki/Using-the-Compiler-API
+
+```typescript
+const materialTable = [{
+    name: 'Фанера',
+    code: 'plywood',
+    price: {
+        3: [{length: {min: 0, max: 100}, price: 24}, {length: {min: 100, max: 500}, price: 16}],
+        4: [{length: {min: 0, max: 100}, price: 29}, {length: {min: 100, max: 500}, price: 19}]
+    },
+    calculatePrice: null
+}];
+
+// Длина линии, толщина материала, материал.
+export function calculatePrice(length, thickness, material) {
+   const price = materialTable.find(mater => mater.name === material);
+   const item = price[thickness].find(item => item.length.min > length && item.length.max < length);
+   if (!item) throw new Error(`Не найдена цена для ${length}, ${thickness}, ${material}.`);
+   return item.price * (length / 100);
+}
+export function getMaterialTable() {
+    return materialTable;
+}
+```
+
+На сервере сделать АПИ:
+- версия сервера
+- расчет цены реза calculatePrice
+- справочник материалов (Наименование, код, массив толщин)
+- прием заказа
+
+На клиенте сделать UI формы калькулятора:
+Материал
+Толщина материала
+Ввод файла
+Превью файла
+Кнопку добавить
+Смету
+Кнопку Заказать
+
 Сделать возможность вставки svg-path-length-client на любую HTML-страницу.
     1) Как папку с файлами и прописывание на странице.
     2) Как HTML+CSS+JS (например для установки на Тильде).
