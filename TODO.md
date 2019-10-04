@@ -5,6 +5,10 @@ TODO
 Конфиг можно распарсить при помощи `eval(typescript.transpile())`.
 https://github.com/microsoft/TypeScript/wiki/Using-the-Compiler-API
 
+Теоретически конфиги можно хранить в репозитории NPM, инсталировать глобально и подгружать
+в скрипте через https://github.com/sindresorhus/import-global  
+Разбор этого вопроса см. https://toster.ru/q/672430
+
 ```typescript
 const materialTable = [{
     name: 'Фанера',
