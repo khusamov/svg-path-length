@@ -6,7 +6,7 @@ import packageJson from '../package.json';
 export default class App extends Component {
 	render() {
 		const footerStyle: CSSProperties = {
-			position: 'absolute',
+			position: 'fixed',
 			bottom: 0,
 			left: 0,
 			padding: '8px 15px',
