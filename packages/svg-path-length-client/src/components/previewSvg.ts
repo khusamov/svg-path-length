@@ -1,6 +1,3 @@
-// import {useNamespaces} from 'xpath';
-// import {DOMParser, XMLSerializer} from 'xmldom';
-
 const namespaceMap: Record<string, string> = {
 	svg: 'http://www.w3.org/2000/svg',
 	xlink: 'http://www.w3.org/1999/xlink'

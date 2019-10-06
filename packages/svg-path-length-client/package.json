@@ -3,6 +3,12 @@
   "version": "1.0.2",
   "description": "Клиентская часть калькулятора для расчета длины линий SVG-файла",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
     "@types/jest": "24.0.18",
     "@types/node": "12.7.5",
@@ -15,12 +21,7 @@
     "svg-path-length-library": "^1.0.2",
     "typescript": "3.6.3"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
+  "devDependencies": {},
   "eslintConfig": {
     "extends": "react-app"
   },
