@@ -1,3 +1,11 @@
 .App {
 	padding: 30px;
+	svg {
+		path, line, circle, ellipse {
+			stroke: black;
+			stroke-width: 1px;
+			fill: transparent;
+			vector-effect: non-scaling-stroke;
+		}
+	}
 }

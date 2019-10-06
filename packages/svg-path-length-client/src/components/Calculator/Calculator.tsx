@@ -1,5 +1,7 @@
 import React, {ChangeEvent, Component} from 'react';
 import {ITotalLengthCalculationResult} from 'svg-path-length-library';
+import readAsText from '../readAsText';
+import previewSvg from '../previewSvg';
 
 interface IRequestLengthResult {
 	result: ITotalLengthCalculationResult;
@@ -11,6 +13,7 @@ interface ICalculatorState {
 	status: 'idle' | 'request' | 'failure';
 	requests?: Array<{
 		file: File;
+		fileAsText: string;
 		response: IRequestLengthResult;
 	}>;
 }
@@ -70,6 +73,7 @@ export default class Calculator extends Component<{}, ICalculatorState> {
 								<tr>
 									<th>№</th>
 									<th>Файл</th>
+									<th>Превью</th>
 									<th>Результат запроса</th>
 									<th>Длина линий</th>
 									<th>Единица измерения</th>
@@ -82,6 +86,7 @@ export default class Calculator extends Component<{}, ICalculatorState> {
 										<tr key={index}>
 											<td>{index + 1}</td>
 											<td>{request.file.name}</td>
+											<td dangerouslySetInnerHTML={{__html: request.fileAsText}}/>
 											<td>{request.response.success ? 'ОК' : 'Failure'}</td>
 											<td>{Math.round(request.response.result.totalLength.value)}</td>
 											<td>{request.response.result.totalLength.unit}</td>
@@ -128,6 +133,7 @@ export default class Calculator extends Component<{}, ICalculatorState> {
 						selectedFiles.map(
 							async selectFile => ({
 								file: selectFile,
+								fileAsText: previewSvg(await readAsText(selectFile)),
 								response: await Calculator.requestLength(selectFile)
 							})
 						)
