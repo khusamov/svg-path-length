@@ -19,6 +19,7 @@ export default class MainRouter {
 		const router = new Router<ISvgPathLengthServiceKoaState, ISvgPathLengthServiceKoaState>();
 		router.get('/', this.rootController);
 		router.post('/length', koaBody({multipart: true}), this.lengthController);
+		router.get('/length', this.createGetStubController());
 		return router;
 	}
 
@@ -50,5 +51,17 @@ export default class MainRouter {
 				message: 'Ожидается параметр svg-file-content.'
 			};
 		}
+	};
+
+	/**
+	 * Создать заглушку для get-запроса.
+	 */
+	private static createGetStubController() {
+		return (
+			async (ctx: Context) => {
+				ctx.response.type = 'text/html; charset=utf-8';
+				ctx.body = '<div>Используйте POST-запрос.</div>';
+			}
+		)
 	};
 }
