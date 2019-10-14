@@ -1,43 +1,61 @@
-import Koa from 'koa';
+import Koa, {Context} from 'koa';
 import logger from 'koa-logger';
 import cors from '@koa/cors';
 import MainRouter from './MainRouter';
 
+export interface ISvgPathLengthServiceKoaState {
+	packageJson: {
+		name: string;
+		description: string;
+		version: string;
+	};
+}
+
 export default class SvgPathLengthService {
 	app: Koa;
+	port = 3000;
 
 	constructor(packageJson) {
-		const app = this.app = new Koa;
+		const app = this.app = new Koa<ISvgPathLengthServiceKoaState>();
 
-		// Обработка ошибок.
+		// Передача состояния всего приложения.
 		app.use(async (ctx, next) => {
-			try {
-				await next();
-			} catch (error) {
-				console.log(error);
-				const status = error.status || 500;
-				ctx.status = status;
-				ctx.body = {
-					status: status,
-					name: error.name,
-					message: error.message,
-					stack: error.stack.split('\n'),
-					fileName: error.fileName,
-					columnNumber: error.columnNumber,
-					lineNumber: error.lineNumber
-				};
-			}
+			ctx.state.packageJson = packageJson;
+			await next();
 		});
 
+		app.use(this.errorController);
 		app.use(cors());
 		app.use(logger());
-
-		const router = MainRouter.createRouter(packageJson);
-		app.use(router.routes());
+		app.use(MainRouter.middleware);
 	}
 
-	listen() {
-		this.app.listen(3000);
+	async listen() {
+		return new Promise(resolve => this.app.listen(this.port, () => resolve()));
 	}
+
+	/**
+	 * Обработка ошибок.
+	 * @param ctx
+	 * @param next
+	 */
+	private errorController = async (ctx: Context, next) => {
+		try {
+			await next();
+		} catch (error) {
+			console.log(error);
+			const status = error.status || 500;
+			ctx.status = status;
+			ctx.body = {
+				status: status,
+				name: error.name,
+				message: error.message,
+				stack: error.stack.split('\n'),
+				fileName: error.fileName,
+				columnNumber: error.columnNumber,
+				lineNumber: error.lineNumber
+			};
+		}
+	};
 }
 
