@@ -2,6 +2,7 @@ import Koa, {Context} from 'koa';
 import logger from 'koa-logger';
 import cors from '@koa/cors';
 import MainRouter from './MainRouter';
+import HttpCodeError from './httpCode/HttpCodeError';
 
 export interface ISvgPathLengthServiceKoaState {
 	packageJson: {
@@ -44,7 +45,7 @@ export default class SvgPathLengthService {
 			await next();
 		} catch (error) {
 			console.log(error);
-			const status = error.status || 500;
+			const status = error instanceof HttpCodeError ? error.statusCode : 500;
 			ctx.status = status;
 			ctx.body = {
 				status: status,
