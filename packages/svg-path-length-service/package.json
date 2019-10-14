@@ -32,6 +32,7 @@
     "koa-body": "^4.1.1",
     "koa-logger": "^3.2.1",
     "koa-router": "^7.4.0",
+    "source-map-support": "^0.5.13",
     "svg-path-length-library": "^1.0.2"
   },
   "devDependencies": {

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+require('source-map-support').install();
 const Path = require('path');
 const SvgPathLengthService = require('../dist').default;
 
