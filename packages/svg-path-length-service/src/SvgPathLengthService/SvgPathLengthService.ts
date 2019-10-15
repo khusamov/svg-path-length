@@ -3,25 +3,47 @@ import logger from 'koa-logger';
 import cors from '@koa/cors';
 import MainRouter from './MainRouter';
 import HttpCodeError from './httpCode/HttpCodeError';
+import Config from './Config';
+
+type TNextFunction = () => Promise<any>;
+
+interface IPackageJsonFile {
+	name: string;
+	description: string;
+	version: string;
+}
 
 export interface ISvgPathLengthServiceKoaState {
-	packageJson: {
-		name: string;
-		description: string;
-		version: string;
-	};
+	service: SvgPathLengthService;
+	packageJson: IPackageJsonFile;
 }
 
 export default class SvgPathLengthService {
-	app: Koa;
+	app: Koa | undefined;
 	port = 3000;
+	config = new Config;
 
-	constructor(packageJson) {
-		const app = this.app = new Koa<ISvgPathLengthServiceKoaState>();
+	constructor(private packageJson: IPackageJsonFile) {}
+
+	async listen() {
+		await this.config.load();
+		console.log('Загружен конфиг:', this.config.filePath);
+
+		return (
+			new Promise(resolve => {
+				if (!this.app) this.app = this.createKoaApplication();
+				return this.app.listen(this.port, () => resolve())
+			})
+		);
+	}
+
+	private createKoaApplication(): Koa {
+		const app = new Koa<ISvgPathLengthServiceKoaState>();
 
 		// Передача состояния всего приложения.
 		app.use(async (ctx, next) => {
-			ctx.state.packageJson = packageJson;
+			ctx.state.packageJson = this.packageJson;
+			ctx.state.service = this;
 			await next();
 		});
 
@@ -29,10 +51,8 @@ export default class SvgPathLengthService {
 		app.use(cors());
 		app.use(logger());
 		app.use(MainRouter.middleware);
-	}
 
-	async listen() {
-		return new Promise(resolve => this.app.listen(this.port, () => resolve()));
+		return app;
 	}
 
 	/**
@@ -40,7 +60,7 @@ export default class SvgPathLengthService {
 	 * @param ctx
 	 * @param next
 	 */
-	private errorController = async (ctx: Context, next) => {
+	private errorController = async (ctx: Context, next: TNextFunction) => {
 		try {
 			await next();
 		} catch (error) {
