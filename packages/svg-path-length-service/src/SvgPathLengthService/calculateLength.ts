@@ -6,7 +6,7 @@ import {
 	SvgLengthCalculator
 } from 'svg-path-length-library';
 
-export default async function calculateLength(filepath) {
+export default async function calculateLength(filepath: string) {
 	const svgContainer = await SvgContainer.createFromFile(filepath);
 	const svgLengthCalculator = (
 		new SvgLengthCalculator(svgContainer, {
