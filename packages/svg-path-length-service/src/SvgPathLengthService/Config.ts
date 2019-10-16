@@ -31,13 +31,17 @@ export default class Config implements IConfigExports {
 	}
 
 	private onWatchChange = async () => {
+		this.unwatch();
+		await this.load();
+		console.log('Повторно загружен конфиг:', this.filePath);
+	};
+
+	private unwatch() {
 		if (this.watcher) {
 			this.watcher.close();
 			this.watcher = undefined;
 		}
-		await this.load();
-		console.log('Повторно загружен конфиг:', this.filePath);
-	};
+	}
 
 	private watcher: FSWatcher | undefined;
 
