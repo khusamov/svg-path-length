@@ -70,9 +70,10 @@ export default class Config implements IConfigExports {
 
 	private watcher: FSWatcher | undefined;
 
-	filePath: string = join(process.cwd(), 'config.example.ts');
 	calculatePrice: TCalculatePriceFunction = () => ({value: 0, unit: ''});
 	getMaterialTable: TGetMaterialTableFunction = () => [];
+
+	constructor(private filePath: string) {}
 
 	load = async () => {
 		const configFile = await Config.readConfigFile(this.filePath);
@@ -81,5 +82,6 @@ export default class Config implements IConfigExports {
 		this.calculatePrice = configFileExports.calculatePrice;
 		this.getMaterialTable = configFileExports.getMaterialTable;
 		this.watch();
+		console.log('Загружен конфиг:', this.filePath);
 	};
 }

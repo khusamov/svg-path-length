@@ -4,10 +4,20 @@ import cors from '@koa/cors';
 import MainRouter from './MainRouter';
 import HttpCodeError from './httpCode/HttpCodeError';
 import Config from './Config';
+import {join} from "path";
 
 type TNextFunction = () => Promise<any>;
 
-interface IPackageJsonFile {
+interface ISvgPathLengthServiceParams {
+	packageJson: IPackageJsonFile
+
+	/**
+	 * Абсолютный путь к директории пакета, где находится файл package.json.
+	 */
+	packageRootPath: string;
+}
+
+export interface IPackageJsonFile {
 	name: string;
 	description: string;
 	version: string;
@@ -19,16 +29,20 @@ export interface ISvgPathLengthServiceKoaState {
 }
 
 export default class SvgPathLengthService {
-	app: Koa | undefined;
+	private readonly packageJson: IPackageJsonFile;
+	private readonly packageRootPath: string;
+	private app: Koa | undefined;
+	private config: Config;
 	port = 3000;
-	config = new Config;
 
-	constructor(private packageJson: IPackageJsonFile) {}
+	constructor({packageJson, packageRootPath}: ISvgPathLengthServiceParams) {
+		this.packageJson = packageJson;
+		this.packageRootPath = packageRootPath;
+		this.config = new Config(join(this.packageRootPath, 'config.example.ts'));
+	}
 
 	async listen() {
 		await this.config.load();
-		console.log('Загружен конфиг:', this.config.filePath);
-
 		return (
 			new Promise(resolve => {
 				if (!this.app) this.app = this.createKoaApplication();

@@ -1,2 +1,6 @@
 #!/usr/bin/env node
-require('../dist').serviceStart();
+const {join} = require('path');
+
+require('../dist').serviceStart({
+	packageRootPath: join(__dirname, '..')
+});
