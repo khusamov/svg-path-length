@@ -105,7 +105,10 @@ export default class MainRouter {
 		}
 		if (isNaN(length)) throw new HttpCodeBadRequestError('Параметр length содержит не число');
 
-		ctx.body = config.calculatePrice(length, thickness, materialCode);
+		ctx.body = {
+			request: {length, thickness, material},
+			result: {price: config.calculatePrice(length, thickness, materialCode)}
+		};
 	};
 
 	/**
