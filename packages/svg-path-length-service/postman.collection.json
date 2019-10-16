@@ -1,0 +1,133 @@
+{
+	"info": {
+		"_postman_id": "c926a47c-d040-4da3-bffd-a55bdbace803",
+		"name": "svg-path-length",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "svg-path-length-service",
+			"item": [
+				{
+					"name": "localhost",
+					"item": [
+						{
+							"name": "root",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000"
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "materials",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/materials",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"materials"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "calculate-price",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "material",
+											"value": "plywood",
+											"type": "text"
+										},
+										{
+											"key": "thickness",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "length",
+											"value": "100",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/calculate-price",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"calculate-price"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "khusamov.ru",
+					"item": [
+						{
+							"name": "length",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "svg-file-content",
+											"description": "Файл для расчета длины линий",
+											"type": "file",
+											"src": "/D:/REPO/github/svg-path-length/packages/svg-path-length-library/test/test1.svg"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://khusamov.ru:3000/length",
+									"protocol": "http",
+									"host": [
+										"khusamov",
+										"ru"
+									],
+									"port": "3000",
+									"path": [
+										"length"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			]
+		}
+	]
+}
