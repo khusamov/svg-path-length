@@ -3,13 +3,13 @@
  * для сервиса расчета цены лазерного реза фанеры.
  */
 
-// import {} from '.';
+import {IMaterialTableItem, TCalculatePriceFunction, TGetMaterialTableFunction} from './src/interfaces/IConfigExports';
 
 /**
  * Таблица материалов с ценами.
  * Цены представлены в таблице: Толщина (мм), Длина (мм), Цена (руб./метр).
  */
-const materialTable = [{
+const materialTable: IMaterialTableItem[] = [{
 	name: 'Фанера',
 	code: 'plywood',
 	price: {
@@ -52,25 +52,25 @@ const materialTable = [{
  * @param thickness Толщина материала.
  * @param material Тип материала.
  */
-export function calculatePrice(length, thickness, material) {
-	const materialData = materialTable.find(materialData => materialData.code === material);
-	if (!materialData) throw new Error(`Не найден материал '${material}'`);
+export const calculatePrice: TCalculatePriceFunction = (
+	(length, thickness, material) => {
+		const materialData = materialTable.find(materialData => materialData.code === material);
+		if (!materialData) throw new Error(`Не найден материал '${material}'`);
 
-	const priceTable = materialData.price[thickness];
-	if (!priceTable) throw new Error(`Не найдена толщина ${thickness} для материала ${material}`);
+		const priceTable = materialData.price[thickness];
+		if (!priceTable) throw new Error(`Не найдена толщина ${thickness} для материала ${material}`);
 
-	const item = materialData.price[thickness].find(item => item.length.min >= length && length < item.length.max);
-	if (!item) throw new Error(`Не найдена цена реза длиной ${length} мм для материала ${material} (${thickness} мм)`);
+		const item = materialData.price[thickness].find(item => item.length.min >= length && length < item.length.max);
+		if (!item) throw new Error(`Не найдена цена реза длиной ${length} мм для материала ${material} (${thickness} мм)`);
 
-	return {
-		value: item.price * (length / 100),
-		unit: 'руб.'
-	};
-}
+		return {
+			value: item.price * (length / 100),
+			unit: 'руб.'
+		};
+	}
+);
 
 /**
  * Получить массив материалов с их данными.
  */
-export function getMaterialTable() {
-	return materialTable;
-}
+export const getMaterialTable: TGetMaterialTableFunction = () => materialTable;
