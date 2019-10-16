@@ -34,7 +34,7 @@ export default class Config implements IConfigExports {
 	private watchingEnabled = false;
 
 	filePath: string = join(process.cwd(), 'config.example.ts');
-	calculatePrice: TCalculatePriceFunction = () => 0;
+	calculatePrice: TCalculatePriceFunction = () => ({value: 0, unit: ''});
 	getMaterialTable: TGetMaterialTableFunction = () => [];
 
 	load = async () => {

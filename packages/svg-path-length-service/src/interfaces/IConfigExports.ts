@@ -3,8 +3,13 @@ export default interface IConfigExports {
 	getMaterialTable: TGetMaterialTableFunction;
 }
 
-export type TCalculatePriceFunction = (length: number, thickness: number, material: string) => number;
+export type TCalculatePriceFunction = (length: number, thickness: number, material: string) => ICalculatePriceResult;
 export type TGetMaterialTableFunction = () => IMaterialTableItem[];
+
+interface ICalculatePriceResult {
+	value: number;
+	unit: string;
+}
 
 export interface IMaterialTableItem {
 	name: string;

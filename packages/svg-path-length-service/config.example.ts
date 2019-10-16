@@ -60,7 +60,10 @@ export function calculatePrice(length, thickness, material) {
 	const item = materialData.price[thickness].find(item => item.length.min >= length && length < item.length.max);
 	if (!item) throw new Error(`Не найдена цена реза длиной ${length} мм для материала ${material} (${thickness} мм)`);
 
-	return item.price * (length / 100);
+	return {
+		value: item.price * (length / 100),
+		unit: 'руб.'
+	};
 }
 
 /**
