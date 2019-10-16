@@ -9,12 +9,14 @@ const ssh = new NodeSsh;
 	try {
 		await ssh.connect(sshConfig);
 
+		// Удаление содержимого директории clientDeployConfig.remoteDir
 		const result = (
 			await ssh.execCommand('rm -fr *', {
 				cwd: clientDeployConfig.remoteDir
 			})
 		);
 
+		// Копирование на удаленный сервер директории clientDeployConfig.localDir
 		const status = await ssh.putDirectory(
 			join(__dirname, '..', clientDeployConfig.localDir),
 			clientDeployConfig.remoteDir,
