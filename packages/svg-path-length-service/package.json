@@ -9,7 +9,8 @@
   "typings": "dist/index.d.ts",
   "files": [
     "bin",
-    "dist"
+    "dist",
+    "config.example.ts"
   ],
   "bin": "bin/svg-path-length-service.js",
   "repository": {
