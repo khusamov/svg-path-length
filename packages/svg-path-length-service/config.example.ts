@@ -57,7 +57,7 @@ export function calculatePrice(length, thickness, material) {
 	const priceTable = materialData.price[thickness];
 	if (!priceTable) throw new Error(`Не найдена толщина ${thickness} для материала ${material}`);
 
-	const item = materialData.price[thickness].find(item => item.length.min >= length && item.length.max < length);
+	const item = materialData.price[thickness].find(item => item.length.min >= length && length < item.length.max);
 	if (!item) throw new Error(`Не найдена цена реза длиной ${length} мм для материала ${material} (${thickness} мм)`);
 
 	return item.price * (length / 100);
