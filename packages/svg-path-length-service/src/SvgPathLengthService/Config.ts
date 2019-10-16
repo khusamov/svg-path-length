@@ -13,6 +13,14 @@ export default class Config implements IConfigExports {
 	// 	return exports as IConfigExports;
 	// }
 
+	/**
+	 * Компиляция файла, сохранение во временном файле и импортирование.
+	 * История разбора данного вопроса https://toster.ru/q/675566
+	 * Вместо eval можно было бы использовать vm.runInContext().
+	 * https://nodejs.org/dist/latest-v12.x/docs/api/vm.html#vm_vm_runincontext_code_contextifiedsandbox_options
+	 * @param configFile
+	 * @param fileName
+	 */
 	private static async transpileAndImportConfigFile(configFile: string, fileName?: string): Promise<IConfigExports> {
 		const configFileJavaScriptCode = transpile(configFile, {inlineSourceMap: true}, fileName);
 		const configFileJavaScriptCodeFilePath = join(tmpdir(), Math.random() + '.js');
