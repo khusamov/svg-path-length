@@ -3,26 +3,43 @@ import {promisify} from 'util';
 import {readFile, writeFile, watch, FSWatcher} from 'fs';
 import {join} from 'path';
 import {tmpdir} from 'os';
+import {createContext, runInContext} from 'vm';
 import IConfigExports from '../interfaces/IConfigExports';
 import {TCalculatePriceFunction, TGetMaterialTableFunction} from '..';
 
 export default class Config implements IConfigExports {
-	// private static evalConfigFile(configFile: string, fileName?: string): IConfigExports {
-	// 	let exports = {};
-	// 	eval(transpile(configFile, {inlineSourceMap: true}, fileName));
-	// 	return exports as IConfigExports;
-	// }
-
 	/**
-	 * Компиляция файла, сохранение во временном файле и импортирование.
+	 * Выполнение конфигурационного файла.
 	 * История разбора данного вопроса https://toster.ru/q/675566
 	 * Вместо eval можно было бы использовать vm.runInContext().
 	 * https://nodejs.org/dist/latest-v12.x/docs/api/vm.html#vm_vm_runincontext_code_contextifiedsandbox_options
-	 * @param configFile
+	 *
+	 * Координаты ошибки подставляются НЕ правильные.
+	 * На данный момент координаты ошибки направлены на JS-файл, а не на TS-исходник.
+	 * https://github.com/evanw/node-source-map-support/issues/256
+	 *
+	 * @param configFileContent
 	 * @param fileName
 	 */
-	private static async transpileAndImportConfigFile(configFile: string, fileName?: string): Promise<IConfigExports> {
-		const configFileJavaScriptCode = transpile(configFile, {inlineSourceMap: true}, fileName);
+	private static evalConfigFile(configFileContent: string, fileName: string): IConfigExports {
+		const configFileJavaScriptCode = transpile(configFileContent, {inlineSourceMap: true}, fileName);
+		const sandbox = {exports: {}};
+		runInContext(configFileJavaScriptCode, createContext(sandbox), {filename: fileName});
+		return sandbox.exports as IConfigExports;
+	}
+
+	/**
+	 * Компиляция и импортирование файла. Результат импортирования возвращается.
+	 *
+	 * На данный момент имя файла подставляется правильное (TS-файл), а вот путь к этому файлу
+	 * подставляется неверно (путь к временному JS-файлу).
+	 *
+	 * Координаты ошибки подставляются правильные.
+	 * @param configFileContent
+	 * @param fileName
+	 */
+	private static async transpileAndImportConfigFile(configFileContent: string, fileName?: string): Promise<IConfigExports> {
+		const configFileJavaScriptCode = transpile(configFileContent, {inlineSourceMap: true}, fileName);
 		const configFileJavaScriptCodeFilePath = join(tmpdir(), Math.random() + '.js');
 		await promisify(writeFile)(configFileJavaScriptCodeFilePath, configFileJavaScriptCode);
 		return import(configFileJavaScriptCodeFilePath);
