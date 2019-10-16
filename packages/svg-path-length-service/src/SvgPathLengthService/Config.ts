@@ -1,6 +1,6 @@
 import {transpile} from 'typescript';
 import {promisify} from 'util';
-import {readFile, writeFile, watch} from 'fs';
+import {readFile, writeFile, watch, FSWatcher} from 'fs';
 import {join} from 'path';
 import {tmpdir} from 'os';
 import IConfigExports from '../interfaces/IConfigExports';
@@ -25,13 +25,21 @@ export default class Config implements IConfigExports {
 	}
 
 	private watch() {
-		if (!this.watchingEnabled) {
-			watch(this.filePath, this.load);
-			this.watchingEnabled = true;
+		if (!this.watcher) {
+			this.watcher = watch(this.filePath, this.onWatchChange);
 		}
 	}
 
-	private watchingEnabled = false;
+	private onWatchChange = async () => {
+		if (this.watcher) {
+			this.watcher.close();
+			this.watcher = undefined;
+		}
+		await this.load();
+		console.log('Повторно загружен конфиг:', this.filePath);
+	};
+
+	private watcher: FSWatcher | undefined;
 
 	filePath: string = join(process.cwd(), 'config.example.ts');
 	calculatePrice: TCalculatePriceFunction = () => ({value: 0, unit: ''});
