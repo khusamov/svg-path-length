@@ -12,6 +12,9 @@
 pm2 start npx --name svg-path-length-service -- svg-path-length-service
 ```
 
+Здесь `--name` имя процесса для списка процессов PM2, 
+а опция `--` передает аргументы в процесс `npx`.
+
 ### Через файл `ecosystem.config.js` 
 
 Для запуска сайта при помощи `pm2` следует создать файл `ecosystem.config.js` 
