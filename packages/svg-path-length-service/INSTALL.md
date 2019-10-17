@@ -22,11 +22,11 @@ pm2 start npx --name svg-path-length-service -- svg-path-length-service
 
 ```javascript
 module.exports = {
-  apps : [{
-    name: "svg-path-length-service",
-    script: "/usr/bin/npx",
-    args: "--package svg-path-length-service"
-  }]
+    apps : [{
+        name: "svg-path-length-service",
+        script: "/usr/bin/npx",
+        args: "svg-path-length-service"
+    }]
 }
 ```
 
