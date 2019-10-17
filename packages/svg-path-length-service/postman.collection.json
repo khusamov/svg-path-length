@@ -122,6 +122,66 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "materials",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://khusamov.ru:3000/materials",
+									"protocol": "http",
+									"host": [
+										"khusamov",
+										"ru"
+									],
+									"port": "3000",
+									"path": [
+										"materials"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "calculate-price",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "material",
+											"value": "plywood",
+											"type": "text"
+										},
+										{
+											"key": "thickness",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "length",
+											"value": "100",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://khusamov.ru:3000/calculate-price",
+									"protocol": "http",
+									"host": [
+										"khusamov",
+										"ru"
+									],
+									"port": "3000",
+									"path": [
+										"calculate-price"
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"protocolProfileBehavior": {},
