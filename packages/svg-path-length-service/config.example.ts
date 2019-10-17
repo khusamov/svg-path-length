@@ -3,7 +3,12 @@
  * для сервиса расчета цены лазерного реза фанеры.
  */
 
-import {IMaterialTableItem, TCalculatePriceFunction, TGetMaterialTableFunction} from './src/interfaces/IConfigExports';
+import {IPriceByThickness, IMaterialTableItem, TCalculatePriceFunction, TGetMaterialTableFunction} from './src/interfaces/IConfigExports';
+
+const price: IPriceByThickness = {
+	3: [{length: {min: 0, max: 100}, price: 24}, {length: {min: 100, max: 500}, price: 16}, {length: {min: 500, max: 5000}, price: 13}],
+	4: [{length: {min: 0, max: 100}, price: 29}, {length: {min: 100, max: 500}, price: 19}, {length: {min: 500, max: 5000}, price: 16}]
+};
 
 /**
  * Таблица материалов с ценами.
@@ -12,38 +17,23 @@ import {IMaterialTableItem, TCalculatePriceFunction, TGetMaterialTableFunction} 
 const materialTable: IMaterialTableItem[] = [{
 	name: 'Фанера',
 	code: 'plywood',
-	price: {
-		3: [{length: {min: 0, max: 100}, price: 24}, {length: {min: 100, max: 500}, price: 16}],
-		4: [{length: {min: 0, max: 100}, price: 29}, {length: {min: 100, max: 500}, price: 19}]
-	}
+	price
 }, {
 	name: 'Оргстекло',
 	code: 'plywood',
-	price: {
-		3: [{length: {min: 0, max: 100}, price: 24}, {length: {min: 100, max: 500}, price: 16}],
-		4: [{length: {min: 0, max: 100}, price: 29}, {length: {min: 100, max: 500}, price: 19}]
-	}
+	price
 }, {
 	name: 'МДФ (ДВП)',
 	code: 'fibreboard',
-	price: {
-		3: [{length: {min: 0, max: 100}, price: 24}, {length: {min: 100, max: 500}, price: 16}],
-		4: [{length: {min: 0, max: 100}, price: 29}, {length: {min: 100, max: 500}, price: 19}]
-	}
+	price
 }, {
 	name: 'Массив дерева',
 	code: 'solid-wood',
-	price: {
-		3: [{length: {min: 0, max: 100}, price: 24}, {length: {min: 100, max: 500}, price: 16}],
-		4: [{length: {min: 0, max: 100}, price: 29}, {length: {min: 100, max: 500}, price: 19}]
-	}
+	price
 }, {
 	name: 'Картон',
 	code: 'cardboard',
-	price: {
-		3: [{length: {min: 0, max: 100}, price: 24}, {length: {min: 100, max: 500}, price: 16}],
-		4: [{length: {min: 0, max: 100}, price: 29}, {length: {min: 100, max: 500}, price: 19}]
-	}
+	price
 }];
 
 /**
@@ -60,7 +50,7 @@ export const calculatePrice: TCalculatePriceFunction = (
 		const priceTable = materialData.price[thickness];
 		if (!priceTable) throw new Error(`Не найдена толщина ${thickness} для материала ${material}`);
 
-		const item = materialData.price[thickness].find(item => item.length.min >= length && length < item.length.max);
+		const item = priceTable.find(item => item.length.min <= length && length < item.length.max);
 		if (!item) throw new Error(`Не найдена цена реза длиной ${length} мм для материала ${material} (${thickness} мм)`);
 
 		return {
