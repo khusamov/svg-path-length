@@ -15,6 +15,19 @@ export interface IMaterialTableItem {
 	name: string;
 	code: string;
 	price: IPriceByThickness;
+	/**
+	 * Скорость реза, мм/мин, для каждой толщины.
+	 * Время реза считается как длина / скорость.
+	 */
+	speed: ISpeedByThickness;
+}
+
+/**
+ * Скорость реза в зависимости от толщины материала.
+ * Толщина задается в мм, скорость — в мм/мин.
+ */
+export interface ISpeedByThickness {
+	[thickness: number]: number;
 }
 
 /**

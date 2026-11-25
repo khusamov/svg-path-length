@@ -43,11 +43,11 @@ export default class MainRouter {
 	 * Метод для расчета длины.
 	 */
 	private static lengthController = async (ctx: Context) => {
-		if (!(ctx.request.files && ctx.request.files['svg-file-content'])) {
+		const uploadedFile = ctx.request.files && ctx.request.files['svg-file-content'];
+		if (!uploadedFile) {
 			throw new HttpCodeBadRequestError('Ожидается параметр svg-file-content');
 		}
-		const svgFilePath = ctx.request.files['svg-file-content'].path;
-		const result = await calculateLength(svgFilePath);
+		const result = await calculateLength(uploadedFile.path, uploadedFile.name);
 		ctx.body = {result};
 	};
 
@@ -95,8 +95,7 @@ export default class MainRouter {
 			if (!svgFileContent) {
 				throw new HttpCodeBadRequestError('Ожидается параметр svg-file-content или length');
 			}
-			const svgFilePath = svgFileContent.path;
-			const calculateLengthResult = await calculateLength(svgFilePath);
+			const calculateLengthResult = await calculateLength(svgFileContent.path, svgFileContent.name);
 			const unit = calculateLengthResult.totalLength.unit;
 			if (unit !== 'mm') throw new Error(`Единица измерения линий '${unit}', а ожидается mm`);
 			length = calculateLengthResult.totalLength.value;

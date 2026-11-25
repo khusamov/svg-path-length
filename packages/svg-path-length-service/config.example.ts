@@ -3,7 +3,7 @@
  * для сервиса расчета цены лазерного реза фанеры.
  */
 
-import {IPriceByThickness, IMaterialTableItem, TCalculatePriceFunction, TGetMaterialTableFunction} from './src/interfaces/IConfigExports';
+import {IPriceByThickness, IMaterialTableItem, ISpeedByThickness, TCalculatePriceFunction, TGetMaterialTableFunction} from './src/interfaces/IConfigExports';
 
 const price: IPriceByThickness = {
 	3: [{length: {min: 0, max: 100}, price: 24}, {length: {min: 100, max: 500}, price: 16}, {length: {min: 500, max: 5000}, price: 13}],
@@ -11,29 +11,46 @@ const price: IPriceByThickness = {
 };
 
 /**
- * Таблица материалов с ценами.
+ * Скорость сквозного реза, мм/мин, для толщин 3 и 4 мм.
+ */
+const speed = {
+	plywood: {3: 900, 4: 550} as ISpeedByThickness,
+	acrylic: {3: 1400, 4: 900} as ISpeedByThickness,
+	fibreboard: {3: 700, 4: 420} as ISpeedByThickness,
+	solidWood: {3: 350, 4: 220} as ISpeedByThickness,
+	cardboard: {3: 4000, 4: 2800} as ISpeedByThickness
+};
+
+/**
+ * Таблица материалов с ценами и скоростью реза.
  * Цены представлены в таблице: Толщина (мм), Длина (мм), Цена (руб./метр).
+ * Скорость задается в мм/мин и используется для расчета времени реза.
  */
 const materialTable: IMaterialTableItem[] = [{
 	name: 'Фанера',
 	code: 'plywood',
-	price
+	price,
+	speed: speed.plywood
 }, {
 	name: 'Оргстекло',
 	code: 'plywood',
-	price
+	price,
+	speed: speed.acrylic
 }, {
 	name: 'МДФ (ДВП)',
 	code: 'fibreboard',
-	price
+	price,
+	speed: speed.fibreboard
 }, {
 	name: 'Массив дерева',
 	code: 'solid-wood',
-	price
+	price,
+	speed: speed.solidWood
 }, {
 	name: 'Картон',
 	code: 'cardboard',
-	price
+	price,
+	speed: speed.cardboard
 }];
 
 /**
