@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="200mm" height="140mm" viewBox="0 0 200 140" fill="none" stroke="#1c1917" stroke-width="0.45" stroke-linejoin="round" stroke-linecap="round">
+<path d="M 5 5 H 195 V 135 H 5 Z"/>
+<path d="M 12 28 C 50 12 80 44 110 28 S 170 12 188 28"/>
+<path d="M 12 52 C 50 36 80 68 110 52 S 170 36 188 52"/>
+<path d="M 12 76 C 50 60 80 92 110 76 S 170 60 188 76"/>
+<path d="M 12 100 C 50 84 80 116 110 100 S 170 84 188 100"/>
+</svg>

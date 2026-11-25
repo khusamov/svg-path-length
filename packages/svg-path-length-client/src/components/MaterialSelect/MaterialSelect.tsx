@@ -10,11 +10,11 @@ export default class MaterialSelect extends Component<IMaterialSelectProps> {
 	render() {
 		const {materials} = this.props;
 		return (
-			<select onChange={this.onSelectChange}>
+			<select className="field__control" onChange={this.onSelectChange} aria-label="Материал">
 				<option>Не выбрано</option>
 				{
 					materials.map((material, index) => (
-						<option key={index} value={material.code}>
+						<option key={index} value={material.name}>
 							{material.name}
 						</option>
 					))
@@ -25,7 +25,7 @@ export default class MaterialSelect extends Component<IMaterialSelectProps> {
 
 	private onSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
 		const {materials, onChange} = this.props;
-		const selectedMaterial = materials.find(material => material.code === event.target.value);
+		const selectedMaterial = materials.find(material => material.name === event.target.value);
 		onChange(selectedMaterial);
 	};
 }

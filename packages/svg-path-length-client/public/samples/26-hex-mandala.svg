@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="180mm" height="180mm" viewBox="0 0 180 180" fill="none" stroke="#1c1917" stroke-width="0.45" stroke-linejoin="round" stroke-linecap="round">
+<circle cx="90" cy="90" r="12"/>
+<path d="M 90 66 L 110.78 78 L 110.78 102 L 90 114 L 69.22 102 L 69.22 78 Z"/>
+<path d="M 90 50 L 124.64 70 L 124.64 110 L 90 130 L 55.36 110 L 55.36 70 Z"/>
+<path d="M 90 34 L 138.5 62 L 138.5 118 L 90 146 L 41.5 118 L 41.5 62 Z"/>
+<path d="M 90 18 L 152.35 54 L 152.35 126 L 90 162 L 27.65 126 L 27.65 54 Z"/>
+<path d="M 90 78 L 90 18"/>
+<path d="M 100.39 84 L 152.35 54"/>
+<path d="M 100.39 96 L 152.35 126"/>
+<path d="M 90 102 L 90 162"/>
+<path d="M 79.61 96 L 27.65 126"/>
+<path d="M 79.61 84 L 27.65 54"/>
+</svg>

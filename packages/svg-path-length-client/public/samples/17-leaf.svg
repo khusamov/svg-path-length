@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="120mm" height="180mm" viewBox="0 0 120 180" fill="none" stroke="#1c1917" stroke-width="0.45" stroke-linejoin="round" stroke-linecap="round">
+<path d="M 5 5 H 115 V 175 H 5 Z"/>
+<path d="M 60 20 C 106 50 100 120 60 160 C 20 120 14 50 60 20 Z"/>
+<path d="M 60 28 L 60 154"/>
+<path d="M 60 42 Q 76 48 82 56"/>
+<path d="M 60 42 Q 44 48 38 56"/>
+<path d="M 60 57 Q 85 63 91 71"/>
+<path d="M 60 57 Q 35 63 29 71"/>
+<path d="M 60 72 Q 91.59 78 97.59 86"/>
+<path d="M 60 72 Q 28.41 78 22.41 86"/>
+<path d="M 60 87 Q 94 93 100 101"/>
+<path d="M 60 87 Q 26 93 20 101"/>
+<path d="M 60 102 Q 91.59 108 97.59 116"/>
+<path d="M 60 102 Q 28.41 108 22.41 116"/>
+<path d="M 60 117 Q 85 123 91 131"/>
+<path d="M 60 117 Q 35 123 29 131"/>
+<path d="M 60 132 Q 76 138 82 146"/>
+<path d="M 60 132 Q 44 138 38 146"/>
+</svg>

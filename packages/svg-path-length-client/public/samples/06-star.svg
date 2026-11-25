@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="160mm" height="160mm" viewBox="0 0 160 160" fill="none" stroke="#1c1917" stroke-width="0.45" stroke-linejoin="round" stroke-linecap="round">
+<path d="M 80 12 L 90.72 54.13 L 128.08 31.92 L 105.87 69.28 L 148 80 L 105.87 90.72 L 128.08 128.08 L 90.72 105.87 L 80 148 L 69.28 105.87 L 31.92 128.08 L 54.13 90.72 L 12 80 L 54.13 69.28 L 31.92 31.92 L 69.28 54.13 Z"/>
+<path d="M 80 44 L 86.12 65.22 L 105.46 54.54 L 94.78 73.88 L 116 80 L 94.78 86.12 L 105.46 105.46 L 86.12 94.78 L 80 116 L 73.88 94.78 L 54.54 105.46 L 65.22 86.12 L 44 80 L 65.22 73.88 L 54.54 54.54 L 73.88 65.22 Z"/>
+<circle cx="80" cy="80" r="8"/>
+</svg>

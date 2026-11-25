@@ -1,5 +1,5 @@
 import ServiceModel from './ServiceModel';
-import {IMaterialTableItem as IMaterial, IPriceByThickness} from 'svg-path-length-service';
+import {IMaterialTableItem as IMaterial, IPriceByThickness, ISpeedByThickness} from 'svg-path-length-service';
 
 export default class MaterialModel implements IMaterial {
 	/**
@@ -13,6 +13,7 @@ export default class MaterialModel implements IMaterial {
 	readonly code: string;
 	readonly name: string;
 	readonly price: IPriceByThickness;
+	readonly speed: ISpeedByThickness;
 
 	/**
 	 * Перечень толщин, которые можно заказывать для данного материала.
@@ -26,9 +27,10 @@ export default class MaterialModel implements IMaterial {
 		return result;
 	}
 
-	constructor({code, name, price}: IMaterial) {
+	constructor({code, name, price, speed}: IMaterial) {
 		this.code = code;
 		this.name = name;
 		this.price = price;
+		this.speed = speed || {};
 	}
 }
